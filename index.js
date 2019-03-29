@@ -5,16 +5,9 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-function sum(a, ...b) {
-    if (a) {
-        return a + sum(...b);
-    }
-    return 0
-}
-
 const freq = total => n => n * 100/total
 
-// 1) On affiche les 3 possibilites
+// 1) On affiche les 3 possibilities
 //
 // 2) le spectateur choisi une porte
 // 3) l'animateur montre une chevre
@@ -29,7 +22,7 @@ const freq = total => n => n * 100/total
 
 // // C chevre
 // // V voiture
-const possibilites = [
+const possibilities = [
     ['C', 'C', 'V'],
     ['C', 'V', 'C'],
     ['V', 'C', 'C'],
@@ -38,34 +31,8 @@ const possibilites = [
 // expected output: 0, 1 or 2
 
 function run() {
-    const portes = [...possibilites[getRandomInt(3)]];
-
-    // 2)
-    const choixSpec = getRandomInt(3);
-
-    let portesRestantes;
-
-    if (choixSpec === 0) {
-        portesRestantes = [portes[1], portes[2]]
-    } else if (choixSpec === 1) {
-        portesRestantes = [portes[0], portes[2]]
-    } else if (choixSpec === 2) {
-        portesRestantes = [portes[0], portes[1]]
-    }
-
-
-    // 3)
-    // on montre une chevre
-    const montreChevre = portesRestantes.findIndex(a => a === 'C')
-
-    let porteRestante;
-    if (montreChevre === 0) {
-        porteRestante = portesRestantes[1]
-    } else {
-        porteRestante = portesRestantes[0]
-    }
-
-    return portes[choixSpec];
+    const doors = possibilities[getRandomInt(3)];
+    return doors[getRandomInt(3)];
 }
 
 
@@ -79,7 +46,9 @@ for (let i = 0; i < 10000000; i++) {
     } else {
         winIfChange++
     }
+
+    if (i % 100000 === 0) {
+    console.log({winIfKeep, winIfChange});
+    }
 }
 
-
-console.log({winIfKeep, winIfChange});
