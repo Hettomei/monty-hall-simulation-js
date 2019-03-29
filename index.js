@@ -5,7 +5,7 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * Math.floor(max));
 }
 
-const freq = total => n => n * 100/total
+const freq = total => n => (n * 100/total).toFixed(5)
 
 // 1) On affiche les 3 possibilities
 //
@@ -23,16 +23,15 @@ const freq = total => n => n * 100/total
 // // C chevre
 // // V voiture
 const possibilities = [
-    ['C', 'C', 'V'],
-    ['C', 'V', 'C'],
-    ['V', 'C', 'C'],
+    'CCV',
+    'CVC',
+    'VCC',
 ]
 
 // expected output: 0, 1 or 2
 
 function run() {
-    const doors = possibilities[getRandomInt(3)];
-    return doors[getRandomInt(3)];
+    return possibilities[getRandomInt(3)][getRandomInt(3)];
 }
 
 
@@ -40,15 +39,15 @@ let winIfKeep = 0;
 let winIfChange = 0;
 
 
-for (let i = 0; i < 10000000; i++) {
+for (let i = 1; i < 10000000000; i++) {
     if (run() === 'V') {
         winIfKeep++;
     } else {
         winIfChange++
     }
 
-    if (i % 100000 === 0) {
-    console.log({winIfKeep, winIfChange});
+    if (i % 5000000 === 0) {
+        console.log({ winIfKeep, winIfChange });
+        console.log({ freqKeep: freq(i)(winIfKeep), freqChange: freq(i)(winIfChange) });
     }
 }
-
